@@ -97,6 +97,9 @@ class GenerativeModel:
 
         self._client = None
         self._async_client = None
+        self._default_request_options = {
+            "timeout": 600
+        }
 
     @property
     def model_name(self):
@@ -248,7 +251,7 @@ class GenerativeModel:
             self._client = client.get_default_generative_client()
 
         if request_options is None:
-            request_options = {}
+            request_options = self._default_request_options
 
         try:
             if stream:
@@ -295,7 +298,7 @@ class GenerativeModel:
             self._async_client = client.get_default_generative_async_client()
 
         if request_options is None:
-            request_options = {}
+            request_options = self._default_request_options
 
         try:
             if stream:
